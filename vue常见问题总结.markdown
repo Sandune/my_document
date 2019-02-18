@@ -3,14 +3,14 @@
 
 ### 1. 子组件直接修改父组件参数
 
-  1. js写法
+1. js写法
 
 ```javascript
   :payMethod.sync="payMethod"
   this.$emit('update:payMethod',this.methodData);
 ```
 
-  2. ts 写法
+2. ts 写法
 
 ```typescript
 @Emit('update:userCard')
