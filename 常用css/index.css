@@ -1,0 +1,39 @@
+html{width: 100%;height: 100vh;background-color: #fdf9ff}
+body{width: 100%;height: 100vh;background-color: #fdf9ff}
+/*font-size*/
+h1{font-size: 20px}
+h2{font-size: 15px}
+.text-main-title{font-size: 20px;}
+.text-regular-title{font-size: 18px;}
+.text-small-title{font-size: 15px;}
+.text-smaller-title{font-size: 14px;}
+.text-regular{font-size: 12px;}
+.text-small{font-size: 11px;}
+.text-smaller{font-size: 10px;}
+.text-very-small{font-size: 9px;}
+.text-weight-normal{font-weight: normal;}
+.text-weight-bold{font-weight: bold}
+/*color*/
+.bg-blue{background-color: rgb(24, 144, 255);}
+.blue{color: rgb(24, 144, 255);}
+.bg-gray{background-color: rgb(241, 241, 241);}
+.light-bg-gray{background-color: rgb(249, 249, 249);}
+.light-gray{color: rgb(125, 137, 148);}
+.dark-gray{color: rgb(74, 74, 74);}
+.black{color: rgb(28, 34, 55);}
+.red{color:red}
+.bg-red{background-color: rgb(251, 88, 88)}
+.light-red{color: rgb(251, 88, 88)}
+.white{color:white}
+/*text aligned*/
+.left.aligned{text-align: left}
+.right.aligned{text-align: right}
+.center.aligned{text-align: center}
+/*flex*/
+.jc-flex-row{display: -webkit-flex;display: flex;flex-wrap: wrap;flex-direction: row;justify-content: space-between;}
+.jc-half-row{display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-start;}
+.jc-half-col-l{flex-shrink: 0;}
+.jc-half-col-r{flex-grow: 1;}
+/* line-padding */
+.line-padding{padding: 1rem 0;}
+.block-title{padding: 0.3rem 0.5rem;font-size: 11px;color: rgb(125, 137, 148);}

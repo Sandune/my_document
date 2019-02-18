@@ -135,7 +135,6 @@ Component.registerHooks([
 
 or
 
-
 @Component({
   components: {
     'card-view' : CardView,
