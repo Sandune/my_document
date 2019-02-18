@@ -1,24 +1,29 @@
 // 下划线转换驼峰
-export function toHump(data:any) {
-  for (var i in data) {
-    var name = i.replace(/\_(\w)/g, function (all, letter) {
-      return letter.toUpperCase()
-    })
-    if (i !== name) {
-      data[name] = data[i]
-      delete data[i]
+export function toHump(data: any) {
+  for (const i of data) {
+    const name = i.replace(/\_(\w)/g, (all: any, letter: any) => {
+      return letter.toUpperCase();
+    });
+    if (i === 'openid') {
+      data[name] = data.openId;
+      delete data[i];
+    } else {
+      if (i !== name) {
+        data[name] = data[i];
+        delete data[i];
+      }
     }
   }
-  return data
+  return data;
 }
 // 驼峰转换下划线
-export function toLine(data:any) {
-  for (var i in data) {
-    var name = i.replace(/([A-Z])/g, '_$1').toLowerCase()
+export function toLine(data: any) {
+  for (const i of data) {
+    const name = i.replace(/([A-Z])/g, '_$1').toLowerCase();
     if (i !== name) {
-      data[name] = data[i]
-      delete data[i]
+      data[name] = data[i];
+      delete data[i];
     }
   }
-  return data
+  return data;
 }
