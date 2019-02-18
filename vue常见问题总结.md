@@ -119,3 +119,38 @@ window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appi
   <component v-bind:is="currentTabComponent"></component>
 </keep-alive>
 ```
+
+### ts 下在组件中使用导航钩子
+
+```typescript
+import Component from 'vue-class-component'
+
+// Register the router hooks with their names
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate' // for vue-router 2.2+
+])
+//这样就能够在组件中直接调用钩子方法
+
+or
+
+
+@Component({
+  components: {
+    'card-view' : CardView,
+  },
+  beforeRouteLeave: (to, from, next) => {
+    // ...
+    if (to.path === '/'){
+      next()
+    }
+    if (to.path === '/about/order'){
+      next()
+    }else{
+      next('/')
+    }
+  }
+})
+
+```
