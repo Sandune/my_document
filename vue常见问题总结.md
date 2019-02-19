@@ -120,7 +120,7 @@ window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appi
 </keep-alive>
 ```
 
-### ts 下在组件中使用导航钩子
+### 9. ts 下在组件中使用导航钩子
 
 ```typescript
 import Component from 'vue-class-component'
@@ -151,5 +151,28 @@ or
     }
   }
 })
+
+```
+
+### 10. 跨域设置
+
+```typescript
+//vue.config.js
+
+module.exports = {
+  devServer:{
+    proxy: {
+      //配置跨域
+        '/weixin': {
+          target: "https://open.weixin.qq.com/",
+          ws:true,
+          changOrigin:true,
+          pathRewrite:{
+              '^/weixin':'/'
+          }
+        }
+      }
+  }
+}
 
 ```
