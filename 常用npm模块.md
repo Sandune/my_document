@@ -15,6 +15,8 @@
 > * [vue-video-player](https://github.com/surmon-china/vue-video-player) 播放视频模块
 > * [vue-lazyload](https://github.com/hilongjw/vue-lazyload#readme) 图片懒加载
 > * [echarts](https://www.npmjs.com/package/echarts) 数据可视化
+> * [vue-waterfall](https://www.npmjs.com/package/vue-waterfall) 瀑布流
+> 
 
 ---
 
@@ -26,23 +28,34 @@
 > * [js-cookie](https://www.npmjs.com/package/js-cookie) 处理cookie
 > * [sharp](https://github.com/lovell/sharp) 图片处理模块
 > * [node-segment](https://github.com/leizongmin/node-segment) 中文分词
+> * [vue-clipboard2](https://www.npmjs.com/package/vue-clipboard2) 剪贴板
+
+---
 
 #### sql模块
 
 > * [sequelize](https://www.npmjs.com/package/sequelize) node ORM 框架
 
+---
+
 #### 抓包
 
 > * [cheerio](https://www.npmjs.com/package/cheerio) html 标签解析
+
+---
 
 #### 异步
 
 > * [bluebird](https://www.npmjs.com/package/bluebird) 异步模块
 
+---
+
 #### cmd
 
 > * [single-line-log](https://www.npmjs.com/package/single-line-log) 命令行进度条
 > * [colors](https://www.npmjs.com/package/colors) console 中使用颜色
+
+---
 
 #### vue 打包
 
