@@ -1,0 +1,49 @@
+#### 开发工具模块
+
+> * [vue-devtools](https://github.com/vuejs/vue-devtools) 谷歌开发工具模块
+
+---
+
+#### 模版语法
+
+> * [pug](https://www.npmjs.com/package/pug) jade 更新后的
+> * [pug-plain-loader](https://www.npmjs.com/package/pug-plain-loader) 模版加载器
+
+#### 视图模块
+
+> * [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper) 轮播图模块
+> * [vue-video-player](https://github.com/surmon-china/vue-video-player) 播放视频模块
+> * [vue-lazyload](https://github.com/hilongjw/vue-lazyload#readme) 图片懒加载
+> * [echarts](https://www.npmjs.com/package/echarts) 数据可视化
+
+---
+
+#### 数据处理模块
+
+> * [csvtojson](https://www.npmjs.com/package/csvtojson) csv 转 json 数据
+> * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) 加解密 webtoken
+> * [crypto](https://www.npmjs.com/package/crypto) 无需下载，已成为 node 内置模块 -- 加密模块
+> * [js-cookie](https://www.npmjs.com/package/js-cookie) 处理cookie
+> * [sharp](https://github.com/lovell/sharp) 图片处理模块
+> * [node-segment](https://github.com/leizongmin/node-segment) 中文分词
+
+#### sql模块
+
+> * [sequelize](https://www.npmjs.com/package/sequelize) node ORM 框架
+
+#### 抓包
+
+> * [cheerio](https://www.npmjs.com/package/cheerio) html 标签解析
+
+#### 异步
+
+> * [bluebird](https://www.npmjs.com/package/bluebird) 异步模块
+
+#### cmd
+
+> * [single-line-log](https://www.npmjs.com/package/single-line-log) 命令行进度条
+> * [colors](https://www.npmjs.com/package/colors) console 中使用颜色
+
+#### vue 打包
+
+> * [vue-electron](https://www.npmjs.com/package/vue-electron)  跨平台打包
