@@ -112,11 +112,9 @@ window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appi
 
 ### 9.页面缓存-后退不刷新
 
-> keep-alive 内置组件
-
 ```html
 <keep-alive>
-  <component v-bind:is="currentTabComponent"></component>
+  <component v-bind:is="currentTabComponent">keep-alive 内置组件</component>
 </keep-alive>
 ```
 
