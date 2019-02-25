@@ -16,7 +16,6 @@
 > * [vue-lazyload](https://github.com/hilongjw/vue-lazyload#readme) 图片懒加载
 > * [echarts](https://www.npmjs.com/package/echarts) 数据可视化
 > * [vue-waterfall](https://www.npmjs.com/package/vue-waterfall) 瀑布流
-> 
 
 ---
 
@@ -29,6 +28,7 @@
 > * [sharp](https://github.com/lovell/sharp) 图片处理模块
 > * [node-segment](https://github.com/leizongmin/node-segment) 中文分词
 > * [vue-clipboard2](https://www.npmjs.com/package/vue-clipboard2) 剪贴板
+> * [vue-upload-component](https://github.com/lian-yue/vue-upload-component#readme) 文件上传组件
 
 ---
 

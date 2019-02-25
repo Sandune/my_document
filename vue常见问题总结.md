@@ -107,7 +107,7 @@ let isWeiXin = () => { return navigator.userAgent.toLowerCase().indexOf('microme
 ### 8. 前端重定向
 
 ```javascript
-window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb57af6881fb3db44&redirect_uri=' + encodeURI('https://www.suikezou.com') + '&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect'
+window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb57af6881fb3db44sd&redirect_uri=' + encodeURI('https://www.suikezou.com') + '&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect'
 ```
 
 ### 9.页面缓存-后退不刷新
