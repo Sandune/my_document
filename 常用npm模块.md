@@ -28,7 +28,9 @@
 > * [sharp](https://github.com/lovell/sharp) 图片处理模块
 > * [node-segment](https://github.com/leizongmin/node-segment) 中文分词
 > * [vue-clipboard2](https://www.npmjs.com/package/vue-clipboard2) 剪贴板
-> * [vue-upload-component](https://github.com/lian-yue/vue-upload-component#readme) 文件上传组件
+> * [vue-upload-component](https://github.com/lian-yue/vue-upload-component#readme) 文件上传组件(vue2.0)
+> * [filepond](https://github.com/pqina/filepond) 文件上传组件
+> * [vue-simple-uploader](https://github.com/simple-uploader/vue-uploader) 文件上传 注：[node后台编写方式](https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js)
 
 ---
 
