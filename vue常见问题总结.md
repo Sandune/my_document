@@ -53,16 +53,40 @@ const service = axios.create({
 });
 ```
 
-### 4. vue 接收 iframe 通知
+### 4.1 vue 接收 iframe 通知(跨域方式)
 
 ```javascript
-window.addEventListener('message', function(event) {
-        // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
-        var loc = event.data;
-        if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
-          console.log('location', loc);
-        }
-    }, false);
+// 框架页面
+window.addEventListener('message', (event: any) => {
+      const data = JSON.parse(event.data);
+      if (data.name === 'eventName' && event.origin + '/' === config.baseURL) {
+        this.loaded(data.data);
+      }
+    });
+```
+
+```html
+//iframe页面
+<script>
+  top.postMessage(data,targetUrl)
+</script>
+```
+
+### 4.2 vue 接收 iframe 通知(不跨域方式)
+
+```javascript
+// 框架页面
+window['eventName'] = () => {
+  //处理事件
+}
+```
+
+```html
+//iframe页面
+
+<script>
+  window.parent.eventName()
+</script>
 ```
 
 ### 5. 判断 undefined
