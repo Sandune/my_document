@@ -57,9 +57,16 @@
 
 > * [single-line-log](https://www.npmjs.com/package/single-line-log) 命令行进度条
 > * [colors](https://www.npmjs.com/package/colors) console 中使用颜色
+> * [count-files](https://www.npmjs.com/package/count-files) 计算文件数量（可过滤）
 
 ---
 
 #### vue 打包
 
 > * [vue-electron](https://www.npmjs.com/package/vue-electron)  跨平台打包
+
+---
+
+#### email
+
+> * [nodemailer](https://www.npmjs.com/package/nodemailer) 发送邮件
