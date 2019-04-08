@@ -32,6 +32,7 @@
 > * [vue-upload-component](https://github.com/lian-yue/vue-upload-component#readme) 文件上传组件(vue2.0)
 > * [filepond](https://github.com/pqina/filepond) 文件上传组件
 > * [vue-simple-uploader](https://github.com/simple-uploader/vue-uploader) 文件上传 注：[node后台编写方式](https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js)
+> * [vue-i18n](https://www.npmjs.com/package/vue-i18n) 国际化插件
 
 ---
 

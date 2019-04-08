@@ -15,5 +15,6 @@ export default {
     iPad: u.indexOf('iPad') > -1,
     webApp: u.indexOf('Safari') == -1,
     ua: u,
+    pc: !navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i),
     language: (navigator.browserLanguage || navigator.language).toLowerCase()
 }
