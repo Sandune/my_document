@@ -1,5 +1,7 @@
 /**
  * 阿里云短信验证码服务
+ * author sandune
+ * time 2019 3 - 1
  */
 const SMSClient = require('@alicloud/sms-sdk');
 const parseTime = require('./formatdate')

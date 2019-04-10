@@ -1,3 +1,6 @@
+/***
+ * 时间处理函数
+ */
 export function formatTime(date: any) {
   if (typeof date === 'object') {
     date = date;

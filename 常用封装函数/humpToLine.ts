@@ -4,14 +4,9 @@ export function toHump(data: any) {
     const name = i.replace(/\_(\w)/g, (all: any, letter: any) => {
       return letter.toUpperCase();
     });
-    if (i === 'openid') {
-      data[name] = data.openId;
+    if (i !== name) {
+      data[name] = data[i];
       delete data[i];
-    } else {
-      if (i !== name) {
-        data[name] = data[i];
-        delete data[i];
-      }
     }
   }
   return data;

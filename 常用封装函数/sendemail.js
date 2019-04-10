@@ -1,6 +1,13 @@
 "use strict";
 const nodemailer = require("nodemailer");
 
+/**
+ * 
+ * @param {*} toUser user email address
+ * @param {*} title email title
+ * @param {*} message email info
+ * @param {*} html <html></html>
+ */
 // async..await is not allowed in global scope, must use a wrapper
 async function main(toUser,title,message,html){
 

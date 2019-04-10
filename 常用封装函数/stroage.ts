@@ -12,7 +12,7 @@ type SuccessHandler = (res: any) => any;
 interface Callback {success?: SuccessHandler | undefined ; fail?: ErrorHandler | undefined ; }
 
 // manage storaxge
-export function setStorage(storageName: any, storageValue: any, resolve?: Callback) {
+export function setStorage(storageName: string, storageValue, resolve?: Callback) {
 
       if (window.localStorage) {
           if (typeof storageValue !== 'string') {
