@@ -198,3 +198,34 @@ module.exports = {
 }
 
 ```
+
+### 11.监听 iframe 加载完成
+
+```javascript
+  //html
+  iframe.book(ref="reader" width="100%" height="100%" scrolling="no" frameborder="0")
+
+  //添加 onload 事件
+  (this.$refs.reader as any).onload = () => {
+    //加载完成后执行该方法
+    this.loaded();
+  }
+```
+
+### 12. iframe 跨域解决方案
+
+```javascript
+  //通过在父页面和子页面设置
+  document.domain = 'sandune.cn'
+
+  // 我是在使用 reveal.js 时需要用 vue 嵌套 html 来访问 Reveal 对象，必须要在 iframe 加载完成后才能访问到
+  loaded(){
+    // 获取reveal对象
+    this.reveal = (this.$refs.reader as any).contentWindow.Reveal;
+    // 监听滑动事件
+    this.reveal.addEventListener( 'slidechanged', (event) => {
+      this.autoPlay(event.indexh);
+    } );
+  }
+
+```
