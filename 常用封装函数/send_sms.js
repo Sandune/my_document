@@ -45,14 +45,13 @@ module.exports = {
                 //   BizId: '662318451424950724^0',
                 //   Code: 'OK'
                 // }
-                console.log(res)
-              resolve(res)
+                resolve({status: true})
             }else{
-              reject(false)
+              reject({status: false, msg: Message})
             }
         }, function (err) {
-            console.log(err)
-            reject(false)
+          let { Message } = err
+          reject({status: false, message: err.data.Message})
         })
     })
   },
@@ -86,6 +85,8 @@ module.exports = {
                 }else{
                   resolve({status:true})
                 }
+              }else{
+                resolve({status: true})
               }
             }else{//携带code则验证code
               //判断时间差距
