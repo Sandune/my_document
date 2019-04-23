@@ -94,3 +94,50 @@ export function formatTimeToText(time: Date | number, option: any) {
 export function isExternal(path: string) {
   return /^(https?:|mailto:|tel:)/.test(path);
 }
+
+export function jsGetAge(strBirthday) {
+  const strBirthdayArr = strBirthday.split('-');
+  const birthYear = strBirthdayArr[0];
+  const birthMonth = strBirthdayArr[1];
+  const birthDay = strBirthdayArr[2];
+
+  const d = new Date();
+  const nowYear = d.getFullYear();
+  const nowMonth = d.getMonth() + 1;
+  const nowDay = d.getDate();
+
+  if (nowYear === birthYear) {// 同年计算月份
+    const monthDiff = nowMonth - birthMonth; // 月之差
+    if (monthDiff > 0) {
+      return {
+        age: 0,
+        month: monthDiff,
+      };
+    } else {
+      return {
+        age: 0,
+        month: 0,
+      };
+    }
+  } else {
+    const ageDiff = nowYear - birthYear ; // 年之差
+    if (ageDiff > 0) {
+      const monthDiff = nowMonth - birthMonth;
+      if (monthDiff > 0) {
+        return {
+          age: ageDiff,
+          month: monthDiff,
+        };
+      } else {
+        return {
+          age: ageDiff - 1,
+          month: monthDiff + 12,
+        };
+      }
+
+    } else {
+      return Error('错误');
+    }
+  }
+
+}
