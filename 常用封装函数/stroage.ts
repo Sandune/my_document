@@ -1,24 +1,36 @@
 /**
  * 2019 2-14
  * author sandune
- *
- * @param storageName key
- * @param storageValue value
  */
 
 type ErrorHandler = (err: Error) => void;
 type SuccessHandler = (res: any) => any;
 
-interface Callback {success?: SuccessHandler | undefined ; fail?: ErrorHandler | undefined ; }
+interface Callback {
+  success?: SuccessHandler | undefined ;
+  fail?: ErrorHandler | undefined ;
+  expired?: ErrorHandler | undefined;
+}
 
+/**
+ *
+ * @param storageName key name
+ * @param storageValue value
+ * @param resolve callback
+ * @param storageHoldTime Hold time : day --- number; if none Permanent storage
+ */
 // manage storaxge
-export function setStorage(storageName: string, storageValue, resolve?: Callback) {
+export function setStorage(storageName: any, storageValue: any, resolve?: Callback, storageHoldTime?: number) {
 
       if (window.localStorage) {
           if (typeof storageValue !== 'string') {
               storageValue = JSON.stringify(storageValue);
           }
           localStorage.setItem(storageName, storageValue);
+          if (storageHoldTime) {
+            const holdTime: any = new Date().getTime() + (storageHoldTime * 24 * 60 * 1000);
+            localStorage.setItem(storageName + '_HT', holdTime);
+          }
           if (resolve && resolve.success) { resolve.success('success'); }
       } else {
         if (resolve && resolve.fail ) { resolve.fail(Error('This browser does NOT support localStorage')); }
@@ -33,6 +45,19 @@ export function setStorage(storageName: string, storageValue, resolve?: Callback
 
 export function getStorage(storageName: string, resolve?: Callback) {
       const result = localStorage.getItem(storageName);
+
+      // Determine whether it has expired
+      const holdTime: any = localStorage.getItem(storageName + '_HT');
+
+      if (holdTime && holdTime < new Date().getTime()) {
+        localStorage.removeItem(storageName);
+        localStorage.removeItem(storageName + '_HT');
+        if (resolve && resolve.expired) {
+          resolve.expired(Error('date is expired!'));
+        }
+        return '';
+      }
+
       if (result) {
         if (resolve && resolve.success) { resolve.success(result); }
         return result;
