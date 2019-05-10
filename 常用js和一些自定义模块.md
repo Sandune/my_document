@@ -287,3 +287,30 @@ private windowResize() {
   handleOrientationChange(screenDirection);
 }
 ```
+
+### 4. vue全局监听并触发点击音效（给点击的标签添加 字段 和 音频类型）
+
+```ts
+Vue.prototype.clickButtonSound = (soundType) => {
+  const buttonAudio = document.getElementById(soundType) as HTMLAudioElement;
+  buttonAudio.setAttribute('src', sound[soundType]);
+  buttonAudio.muted = false;
+  buttonAudio.play();
+};
+
+
+document.body.addEventListener('touch', (e) => {
+  const event = e || window.event;
+  const target: any = event.target || event.srcElement;
+  const soundType = target.getAttribute('soundType');
+  const clickMusic = target.getAttribute('clickMusic');
+  if (clickMusic === 'true') { Vue.prototype.clickButtonSound(soundType); } else { return false; }
+});
+document.body.addEventListener('click', (e) => {
+  const event = e || window.event;
+  const target: any = event.target || event.srcElement;
+  const soundType = target.getAttribute('soundType');
+  const clickMusic = target.getAttribute('clickMusic');
+  if (clickMusic === 'true') { Vue.prototype.clickButtonSound(soundType); } else { return false; }
+});
+```
