@@ -106,7 +106,7 @@ export function jsGetAge(strBirthday) {
   const nowMonth = d.getMonth() + 1;
   const nowDay = d.getDate();
 
-  if (nowYear === birthYear) {// 同年计算月份
+  if (nowYear + '' === birthYear) {// 同年计算月份
     const monthDiff = nowMonth - birthMonth; // 月之差
     if (monthDiff > 0) {
       return {

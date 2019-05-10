@@ -229,3 +229,32 @@ module.exports = {
   }
 
 ```
+
+### 13.  vue 内嵌iframe ios safari 滑动惯性消失以及iframe宽度不定的问题/并且存在安全策略导致跨域的问题
+
+```css
+  /*外层div添加样式*/
+  -webkit-overflow-scrolling: touch;
+```
+
+```typescript
+  //js 修改iframe内部样式 该方法存在跨域问题（我的解决方法是在 子iframe中添加 document.domain="localhost"）
+  const iframe = this.$refs.iframeBody as any;
+  iframe.src = this.infoUrl;
+  iframe.onload = () => {
+    const review =  iframe.contentWindow.document;
+    const html = review.getElementsByTagName('html')[0];
+    html.style.position = 'relative';
+    html.style.width = '100%';
+    html.style.height = '100%';
+    html.style.overflow = 'hidden';
+    const body = review.getElementsByTagName('body')[0];
+    body.style.position = 'fixed';
+    body.style.top = '0';
+    body.style.left = '0';
+    body.style.width = '100%';
+    body.style.height = '100%';
+    body.style.overflow = 'scroll';
+    body.style['-webkit-overflow-scrolling'] = 'touch';
+  };
+```
