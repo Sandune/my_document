@@ -20,15 +20,16 @@ var evt = "onorientationchange" in window ? "orientationchange" : "resize";
 ```typescript
 <template lang="pug">
   .move-btn(ref="moveBtn",:style="{'left': left + 'px', 'top': top + 'px'}")
-    mu-circular-progress.move-size(v-show="loadingVal != 0" mode="determinate" color="warning" :value="loadingVal" :max="loadingMax" :stroke-width="2" :size="60")
-    mu-circular-progress.move-size(v-show="playVal != 0" mode="determinate" :value="playVal" :max="playMax" :stroke-width="2" :size="60")
-    .move-body(ref="moveBody")
+    mu-circular-progress.move-size.move-btn-height(v-show="loadingVal != 0" mode="determinate" color="warning" :value="loadingVal" :max="loadingMax" :stroke-width="2" :size="btnHeight")
+    mu-circular-progress.move-size.move-btn-height(v-show="playVal != 0" mode="determinate" :value="playVal" :max="playMax" :stroke-width="2" :size="btnHeight")
+    .move-body.move-btn-height(ref="moveBody")
       slot.icon
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
 import browser from '@/utils/browser';
+import { ScreenModule } from '@/store/modules/screen';
 
 @Component
 export default class MoveBtn extends Vue {
@@ -39,8 +40,10 @@ export default class MoveBtn extends Vue {
   @Prop({default: 0}) private playVal!: number;
 
   // 初始化按钮位置
+  private btnHeight = 60;
+  private bottomH = this.btnHeight + 10;
   private left = 10;
-  private top = window.innerHeight - 70;
+  private top = window.innerHeight + this.bottomH;
 
   // 初始屏幕状态
   private screenStatus = '';
@@ -49,43 +52,33 @@ export default class MoveBtn extends Vue {
   @Emit('replayEvent')
     private replayEvent() {}
 
-  private windowResize() {
-    const screenDirection = window.matchMedia('(orientation: portrait)');
+  get deviceState() {
+    return ScreenModule.deviceState;
+  }
 
+  @Watch('deviceState')
+  private windowResize() {
+    this.btnHeight = (this.$refs.moveBtn as any).clientHeight;
+    this.bottomH = this.btnHeight + 10;
     const setSize = (height) => {
       this.left = 10;
-      this.top = height - 70;
+      this.top = height - this.bottomH;
     };
 
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
 
-    const handleOrientationChange = (screenDirectionVal: any) => {
-
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-
-      if (screenDirectionVal.matches) {
-        /* The device is currently in portrait orientation */
-        /* 竖屏处理事件 */
-        // console.log(document.documentElement.clientHeight,'竖屏')
-
-        this.timer = setTimeout(() => {
+    if (this.deviceState) {
+      this.timer = setTimeout(() => {
           setSize(window.innerHeight);
         }, 200);
-      } else {
-        // console.log(document.documentElement.clientHeight,'横屏')
-        this.timer = setTimeout(() => {
+    } else {
+      this.timer = setTimeout(() => {
           setSize(window.innerHeight);
         }, 200);
+    }
 
-        /* The device is currently in landscape orientation */
-        /* 横屏屏处理事件 */
-      }
-    };
-
-    screenDirection.addListener(handleOrientationChange);
-
-    handleOrientationChange(screenDirection);
   }
 
   private isPC(div, isClick, body) {
@@ -120,14 +113,14 @@ export default class MoveBtn extends Vue {
           // 超出边缘回到屏幕内
           if (this.top < 0) {
             this.top = 10;
-          } else if (this.top > clientHeight - 70) {
-            this.top = clientHeight - 70;
+          } else if (this.top > clientHeight - this.bottomH) {
+            this.top = clientHeight - this.bottomH;
           }
 
           if (this.left < 0) {
             this.left = 10;
-          } else if (this.left > clientWidth - 70) {
-            this.left = clientWidth - 70;
+          } else if (this.left > clientWidth - this.bottomH) {
+            this.left = clientWidth - this.bottomH;
           }
 
           // 计算边缘距离
@@ -137,13 +130,13 @@ export default class MoveBtn extends Vue {
           // 判断贴边方向
           if ( Math.abs(isX) > Math.abs(isY) ) {
             if (this.top > clientHeight / 2) {
-              this.top = clientHeight - 70;
+              this.top = clientHeight - this.bottomH;
             } else {
               this.top = 10;
             }
           } else {
             if (this.left > clientWidth / 2) {
-              this.left = clientWidth - 70;
+              this.left = clientWidth - this.bottomH;
             } else {
               this.left = 10;
             }
@@ -155,24 +148,37 @@ export default class MoveBtn extends Vue {
   }
 
   private isPhone(div, isClick, body) {
+    const pos = {
+      x: 0,
+      y: 0,
+    };
     div.addEventListener('touchstart', (e) => {
+        pos.x = Math.round(e.changedTouches[0].pageX);
+        pos.y = Math.round(e.changedTouches[0].pageY);
         isClick = true;
-        e.preventDefault();
         div.style.transition = 'none';
         body.style.opacity = 1;
+        e.preventDefault();
       });
     div.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        // 发生移动则为拖移
-        isClick = false;
+        const nowPos = {
+            x: Math.round(e.changedTouches[0].pageX),
+            y: Math.round(e.changedTouches[0].pageY),
+        };
+        if (nowPos.x === pos.x && nowPos.y === pos.y) {
+            return; // 直接返回掉
+        }
         if (e.targetTouches.length === 1) {
+          // 发生移动则为拖移
+          isClick = false;
           const touch = e.targetTouches[0];
           this.left = touch.clientX - 30;
           this.top = touch.clientY - 30;
         }
+        e.preventDefault();
       });
     div.addEventListener('touchend', (e) => {
-
+        e.preventDefault();
         if (isClick) {
           this.replayEvent();
         }
@@ -185,14 +191,14 @@ export default class MoveBtn extends Vue {
         // 超出边缘回到屏幕内
         if (this.top < 0) {
           this.top = 10;
-        } else if (this.top > clientHeight - 70) {
-          this.top = clientHeight - 70;
+        } else if (this.top > clientHeight - this.bottomH) {
+          this.top = clientHeight - this.bottomH;
         }
 
         if (this.left < 0) {
           this.left = 10;
-        } else if (this.left > clientWidth - 70) {
-          this.left = clientWidth - 70;
+        } else if (this.left > clientWidth - this.bottomH) {
+          this.left = clientWidth - this.bottomH;
         }
 
         // 计算边缘距离
@@ -202,13 +208,13 @@ export default class MoveBtn extends Vue {
         // 判断贴边方向
         if ( Math.abs(isX) > Math.abs(isY) ) {
           if (this.top > clientHeight / 2) {
-            this.top = clientHeight - 70;
+            this.top = clientHeight - this.bottomH;
           } else {
             this.top = 10;
           }
         } else {
           if (this.left > clientWidth / 2) {
-            this.left = clientWidth - 70;
+            this.left = clientWidth - this.bottomH;
           } else {
             this.left = 10;
           }
@@ -227,8 +233,11 @@ export default class MoveBtn extends Vue {
 
     const div: any = this.$refs.moveBtn;
     const body: any = this.$refs.moveBody;
-    this.isPC(div, isClick, body);
-    this.isPhone(div, isClick, body);
+    if (browser.pc) {
+      this.isPC(div, isClick, body);
+    } else {
+      this.isPhone(div, isClick, body);
+    }
   }
 
 }
@@ -242,10 +251,8 @@ export default class MoveBtn extends Vue {
 }
 
 .move-body{
-  padding: 10px;
-  width: 60px;
-  height: 60px;
-  border-radius: 60px;
+  padding: calc((100% - 40px)/2);
+  border-radius: 100%;
   background-color: white;
   border: 2px solid rgb(201, 198, 198);
   opacity: 0.4;
@@ -260,6 +267,15 @@ export default class MoveBtn extends Vue {
 
 .icon{
   transition: all 0.7s;
+}
+
+.move-btn-height{
+  width: 8vw;
+  height: 8vw;
+  min-width: 60px;
+  min-height: 60px;
+  max-width: 90px;
+  max-height: 90px;
 }
 </style>
 
