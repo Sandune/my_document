@@ -28,7 +28,7 @@ export function setStorage(storageName: any, storageValue: any, resolve?: Callba
           }
           localStorage.setItem(storageName, storageValue);
           if (storageHoldTime) {
-            const holdTime: any = new Date().getTime() + (storageHoldTime * 24 * 60 * 1000);
+            const holdTime: any = Math.floor(Date.now() / 1000) + (storageHoldTime * 24 * 3600);
             localStorage.setItem(storageName + '_HT', holdTime);
           }
           if (resolve && resolve.success) { resolve.success('success'); }
@@ -49,7 +49,7 @@ export function getStorage(storageName: string, resolve?: Callback) {
       // Determine whether it has expired
       const holdTime: any = localStorage.getItem(storageName + '_HT');
 
-      if (holdTime && holdTime < new Date().getTime()) {
+      if ((holdTime && holdTime < Math.floor(Date.now() / 1000)) || holdTime > 10000000000) {
         localStorage.removeItem(storageName);
         localStorage.removeItem(storageName + '_HT');
         if (resolve && resolve.expired) {

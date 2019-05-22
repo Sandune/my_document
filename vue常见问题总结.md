@@ -258,3 +258,12 @@ module.exports = {
     body.style['-webkit-overflow-scrolling'] = 'touch';
   };
 ```
+
+### 14. ios软键盘弹起收回，导致浮动界面点击失效
+
+```js
+  (/iphone|ipod|ipad/i.test(navigator.appVersion)) && document.addEventListener('blur', (e) => {
+    // 这里加了个类型判断，因为a等元素也会触发blur事件
+    ['input', 'textarea'].includes(e.target.localName) && document.body.scrollIntoView(false)
+  }, true)
+```
