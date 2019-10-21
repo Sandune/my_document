@@ -17,6 +17,7 @@
 > * [echarts](https://www.npmjs.com/package/echarts) 数据可视化
 > * [vue-waterfall](https://www.npmjs.com/package/vue-waterfall) 瀑布流
 > * [vue-draggable](https://www.npmjs.com/package/vue-draggable) 拖拽排序
+> * [qrcode.vue](https://www.npmjs.com/package/qrcode.vue) vue 二维码生成（支持ts）
 
 ---
 
